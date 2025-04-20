@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const OPENROUTER_API_KEYS = [
         "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",
-        "API_KEY_2",
+        "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",
         "API_KEY_3",
         "API_KEY_4",
         "API_KEY_5",
