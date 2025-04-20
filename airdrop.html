@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mizu AI - Airdrop</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .airdrop-section {
+            position: relative;
+            min-height: calc(100vh - 80px);
+            padding: 7rem 0;
+            background-color: #0a0a0a;
+            overflow: hidden;
+            z-index: 1;
+            margin-top: 80px;
+        }
+
+        .airdrop-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        .airdrop-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .airdrop-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #fff, #0078d4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .airdrop-subtitle {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto 1rem;
+        }
+
+        .reward-info {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .reward-amount {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00c2ff, #0078d4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .countdown-container {
+            background: rgba(0, 120, 212, 0.1);
+            border: 1px solid rgba(0, 120, 212, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .countdown-title {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .countdown-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .listing-info {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2.5rem;
+        }
+
+        .listing-info strong {
+            color: #00c2ff;
+        }
+
+        .tasks-container {
+            margin-bottom: 2.5rem;
+        }
+
+        .tasks-title {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: #fff;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tasks-title i {
+            margin-right: 0.8rem;
+            color: #00c2ff;
+        }
+
+        .task-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+
+        .task-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(0, 120, 212, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .task-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .task-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0, 120, 212, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .task-icon i {
+            font-size: 1.2rem;
+            color: #00c2ff;
+        }
+
+        .task-details h4 {
+            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 0.3rem;
+        }
+
+        .task-details p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .task-action button {
+            background: linear-gradient(135deg, #00c2ff, #0078d4);
+            border: none;
+            border-radius: 20px;
+            padding: 0.6rem 1.2rem;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 10px rgba(0, 120, 212, 0.3);
+        }
+
+        .task-action button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 120, 212, 0.4);
+        }
+
+        .task-action .completed-btn {
+            background: rgba(76, 175, 80, 0.1);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            color: #4CAF50;
+            cursor: default;
+        }
+
+        .task-action .completed-btn:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+        }
+
+        .form-title {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: #fff;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-title i {
+            margin-right: 0.8rem;
+            color: #00c2ff;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: rgba(0, 120, 212, 0.5);
+            box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.2);
+        }
+
+        .form-group .help-text {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 0.3rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #00c2ff, #0078d4, #2b54b8, #7e57c2);
+            background-size: 300% 100%;
+            border: none;
+            border-radius: 8px;
+            padding: 1rem;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 120, 212, 0.4);
+            animation: gradientAnimation 5s ease infinite;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 120, 212, 0.6);
+        }
+
+        .submit-btn:disabled {
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.3);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+            animation: none;
+        }
+
+        .tasks-progress {
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, #00c2ff, #0078d4);
+            border-radius: 5px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .progress-text {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #0a0a0a;
+            border: 1px solid rgba(0, 120, 212, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.3rem;
+            color: #fff;
+        }
+
+        .modal-close {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.5);
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: #fff;
+        }
+
+        .modal-body {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-body p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .modal-footer button {
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-btn-primary {
+            background: linear-gradient(135deg, #00c2ff, #0078d4);
+            border: none;
+            color: #fff;
+            margin-left: 0.5rem;
+            box-shadow: 0 4px 10px rgba(0, 120, 212, 0.3);
+        }
+
+        .modal-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 120, 212, 0.4);
+        }
+
+        .modal-btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .modal-btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            background: rgba(76, 175, 80, 0.1);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .success-icon {
+            font-size: 3rem;
+            color: #4CAF50;
+            margin-bottom: 1rem;
+        }
+
+        .success-title {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .success-text {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .airdrop-section {
+                padding: 5rem 0;
+            }
+
+            .airdrop-container {
+                padding: 1.5rem;
+            }
+
+            .airdrop-title {
+                font-size: 2rem;
+            }
+
+            .countdown-timer {
+                gap: 0.8rem;
+            }
+
+            .countdown-value {
+                font-size: 1.5rem;
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .airdrop-title {
+                font-size: 1.8rem;
+            }
+
+            .reward-amount {
+                font-size: 1.8rem;
+            }
+
+            .countdown-timer {
+                gap: 0.5rem;
+            }
+
+            .countdown-value {
+                font-size: 1.2rem;
+                width: 50px;
+                height: 50px;
+            }
+
+            .countdown-label {
+                font-size: 0.8rem;
+            }
+
+            .task-action button {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <div class="glow glow-3"></div>
+
+    <div class="menu-overlay"></div>
+    
+    <nav>
+        <div class="nav-container">
+            <div class="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="images/logo.png" alt="Mizu AI Logo" width="40" height="40">
+                </div>
+                <div class="brand-name">Mizu AI</div>
+            </div>
+
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="chat.html" class="nav-link">Mizu Chat</a>
+                <a href="#" class="nav-link">Airdrop</a>
+                <a href="presale.html" class="nav-link">Presale</a>
+            </div>
+
+            <div class="social-icons">
+                <a href="https://twitter.com/mizuai" target="_blank" class="social-icon">
+                    <i class="fa-brands fa-x-twitter"></i>
+                </a>
+                <a href="https://t.me/mizuai" target="_blank" class="social-icon">
+                    <i class="fab fa-telegram"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="airdrop-section">
+        <div class="airdrop-container">
+            <div class="airdrop-header">
+                <h1 class="airdrop-title">Mizu AI Airdrop Campaign</h1>
+                <p class="airdrop-subtitle">Complete simple tasks and earn MIZU tokens. Join our community and be part of the AI revolution.</p>
+            </div>
+
+            <div class="reward-info">
+                <div class="reward-amount">2,000 MIZU Tokens</div>
+                <p>Complete all tasks to receive your airdrop reward</p>
+            </div>
+
+            <div class="countdown-container">
+                <div class="countdown-title">Airdrop Ends In:</div>
+                <div class="countdown-timer" id="countdown">
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="days">00</div>
+                        <div class="countdown-label">Days</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="hours">00</div>
+                        <div class="countdown-label">Hours</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="minutes">00</div>
+                        <div class="countdown-label">Minutes</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="seconds">00</div>
+                        <div class="countdown-label">Seconds</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="listing-info">
+                <p>MIZU Token listing on <strong>May 10, 2025</strong></p>
+            </div>
+
+            <div class="tasks-container">
+                <h3 class="tasks-title"><i class="fas fa-tasks"></i> Complete All Tasks</h3>
+                
+                <div class="tasks-progress">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="tasksProgressBar"></div>
+                    </div>
+                    <div class="progress-text"><span id="completedTasksCount">0</span>/<span id="totalTasksCount">4</span> tasks completed</div>
+                </div>
+                
+                <div class="task-card" data-task="twitter-follow">
+                    <div class="task-info">
+                        <div class="task-icon">
+                            <i class="fa-brands fa-x-twitter"></i>
+                        </div>
+                        <div class="task-details">
+                            <h4>Follow on Twitter</h4>
+                            <p>Follow Mizu AI official Twitter account</p>
+                        </div>
+                    </div>
+                    <div class="task-action">
+                        <button class="task-btn" data-action="twitter-follow">
+                            <i class="fas fa-external-link-alt"></i> Follow
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="task-card" data-task="twitter-retweet">
+                    <div class="task-info">
+                        <div class="task-icon">
+                            <i class="fa-brands fa-x-twitter"></i>
+                        </div>
+                        <div class="task-details">
+                            <h4>Retweet Our Post</h4>
+                            <p>Retweet the Mizu AI Airdrop announcement</p>
+                        </div>
+                    </div>
+                    <div class="task-action">
+                        <button class="task-btn" data-action="twitter-retweet">
+                            <i class="fas fa-retweet"></i> Retweet
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="task-card" data-task="telegram-join">
+                    <div class="task-info">
+                        <div class="task-icon">
+                            <i class="fab fa-telegram"></i>
+                        </div>
+                        <div class="task-details">
+                            <h4>Join Telegram Group</h4>
+                            <p>Join our official Telegram community</p>
+                        </div>
+                    </div>
+                    <div class="task-action">
+                        <button class="task-btn" data-action="telegram-join">
+                            <i class="fas fa-users"></i> Join Group
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="task-card" data-task="telegram-channel">
+                    <div class="task-info">
+                        <div class="task-icon">
+                            <i class="fab fa-telegram"></i>
+                        </div>
+                        <div class="task-details">
+                            <h4>Subscribe to Telegram Channel</h4>
+                            <p>Subscribe to our announcement channel</p>
+                        </div>
+                    </div>
+                    <div class="task-action">
+                        <button class="task-btn" data-action="telegram-channel">
+                            <i class="fas fa-bell"></i> Subscribe
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-container">
+                <h3 class="form-title"><i class="fas fa-user-circle"></i> Submit Your Details</h3>
+                <form id="airdropForm" action="process_airdrop.php" method="POST">
+                    <div class="form-group">
+                        <label for="twitterUsername">Twitter Username</label>
+                        <input type="text" id="twitterUsername" name="twitterUsername" placeholder="@username" required>
+                        <div class="help-text">Enter your Twitter username without the @ symbol</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="telegramUsername">Telegram Username</label>
+                        <input type="text" id="telegramUsername" name="telegramUsername" placeholder="@username" required>
+                        <div class="help-text">Enter your Telegram username without the @ symbol</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="solanaAddress">Solana Wallet Address</label>
+                        <input type="text" id="solanaAddress" name="solanaAddress" placeholder="Enter your Solana wallet address" required>
+                        <div class="help-text">Make sure to enter a valid Solana address that you control</div>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn" id="submitBtn" disabled>Submit Details</button>
+                </form>
+            </div>
+
+            <div class="success-message" id="successMessage">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3 class="success-title">Submission Successful!</h3>
+                <p class="success-text">Your details have been successfully submitted. The MIZU tokens will be airdropped to your wallet after the campaign ends on May 5, 2025.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal" id="taskModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Confirm Task Completion</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="modalMessage">Have you completed this task?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn-secondary" id="cancelTaskBtn">No, Not Yet</button>
+                <button class="modal-btn-primary" id="confirmTaskBtn">Yes, Completed</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="glow glow-1"></div>
+        
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo-container">
+                        <div class="logo">
+                            <img src="images/logo.png" alt="Mizu AI Logo">
+                        </div>
+                        <div class="brand-name">Mizu AI</div>
+                    </div>
+                    <p class="footer-tagline">The Future of AI Conversation</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-links-column">
+                        <h3>Quick Links</h3>
+                        <a href="index.html">Home</a>
+                        <a href="chat.html">Mizu Chat</a>
+                        <a href="index.html#about">About</a>
+                        <a href="index.html#tokenomics">Tokenomics</a>
+                        <a href="index.html#roadmap">Roadmap</a>
+                    </div>
+                </div>
+                
+                <div class="footer-social">
+                    <h3>Connect With Us</h3>
+                    <div class="social-icons">
+                        <a href="https://twitter.com/mizuai" target="_blank" class="social-icon">
+                            <i class="fa-brands fa-x-twitter"></i>
+                        </a>
+                        <a href="https://t.me/mizuai" target="_blank" class="social-icon">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">© 2025 Mizu AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        const menuOverlay = document.querySelector('.menu-overlay');
+        const navbar = document.querySelector('nav');
+
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+            
+            if (hamburger.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
+
+        hamburger.addEventListener('click', toggleMenu);
+
+        menuOverlay.addEventListener('click', toggleMenu);
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            const glows = document.querySelectorAll('.glow');
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+
+            glows[0].style.transform = `translate(${mouseX * 0.03}px, ${mouseY * 0.03}px)`;
+            if (glows[1]) glows[1].style.transform = `translate(${mouseX * -0.02}px, ${mouseY * 0.02}px)`;
+            if (glows[2]) glows[2].style.transform = `translate(${mouseX * 0.01}px, ${mouseY * -0.01}px)`;
+        });
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if (hamburger.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        function updateCountdown() {
+            const targetDate = new Date('May 5, 2025 23:59:59 UTC').getTime();
+            const now = new Date().getTime();
+            const timeLeft = targetDate - now;
+            
+            if (timeLeft <= 0) {
+                document.getElementById('days').innerText = '00';
+                document.getElementById('hours').innerText = '00';
+                document.getElementById('minutes').innerText = '00';
+                document.getElementById('seconds').innerText = '00';
+                return;
+            }
+            
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').innerText = days < 10 ? '0' + days : days;
+            document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+            document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+        }
+        
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        const taskButtons = document.querySelectorAll('.task-btn');
+        const taskModal = document.getElementById('taskModal');
+        const closeModal = document.getElementById('closeModal');
+        const confirmTaskBtn = document.getElementById('confirmTaskBtn');
+        const cancelTaskBtn = document.getElementById('cancelTaskBtn');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalMessage = document.getElementById('modalMessage');
+        const submitBtn = document.getElementById('submitBtn');
+        const tasksProgressBar = document.getElementById('tasksProgressBar');
+        const completedTasksCount = document.getElementById('completedTasksCount');
+        const totalTasksCount = document.getElementById('totalTasksCount');
+        
+        const tasks = {
+            'twitter-follow': {
+                title: 'Follow on Twitter',
+                message: 'Have you followed Mizu AI on Twitter?',
+                url: 'https://twitter.com/MizuAI_Official'
+            },
+            'twitter-retweet': {
+                title: 'Retweet Our Post',
+                message: 'Have you retweeted our airdrop announcement post?',
+                url: 'https://twitter.com/MizuAI_Official/status/1234567890'
+            },
+            'telegram-join': {
+                title: 'Join Telegram Group',
+                message: 'Have you joined our Telegram group?',
+                url: 'https://t.me/MizuAI_Community'
+            },
+            'telegram-channel': {
+                title: 'Subscribe to Telegram Channel',
+                message: 'Have you subscribed to our Telegram announcement channel?',
+                url: 'https://t.me/MizuAI_Announcements'
+            }
+        };
+        
+        let completedTasks = {
+            'twitter-follow': false,
+            'twitter-retweet': false,
+            'telegram-join': false,
+            'telegram-channel': false,
+        };
+        
+        function loadCompletedTasks() {
+            const storedTasks = localStorage.getItem('mizuAirdropTasks');
+            if (storedTasks) {
+                completedTasks = JSON.parse(storedTasks);
+                
+                Object.keys(completedTasks).forEach(taskId => {
+                    if (completedTasks[taskId]) {
+                        markTaskAsCompleted(taskId);
+                    }
+                });
+                
+                updateTasksProgress();
+            }
+        }
+        
+        function saveCompletedTasks() {
+            localStorage.setItem('mizuAirdropTasks', JSON.stringify(completedTasks));
+        }
+        
+        let currentTaskId = null;
+        
+        taskButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const taskAction = this.getAttribute('data-action');
+                const taskCard = this.closest('.task-card');
+                currentTaskId = taskCard.getAttribute('data-task');
+                
+                if (completedTasks[currentTaskId]) {
+                    return;
+                }
+                
+                const task = tasks[currentTaskId];
+                modalTitle.textContent = task.title;
+                modalMessage.textContent = task.message;
+                
+                window.open(task.url, '_blank');
+                
+                taskModal.classList.add('active');
+            });
+        });
+        
+        closeModal.addEventListener('click', function() {
+            taskModal.classList.remove('active');
+            currentTaskId = null;
+        });
+        
+        cancelTaskBtn.addEventListener('click', function() {
+            taskModal.classList.remove('active');
+            currentTaskId = null;
+        });
+        
+        confirmTaskBtn.addEventListener('click', function() {
+            if (currentTaskId) {
+                completedTasks[currentTaskId] = true;
+                saveCompletedTasks();
+                markTaskAsCompleted(currentTaskId);
+                updateTasksProgress();
+                
+                taskModal.classList.remove('active');
+                currentTaskId = null;
+            }
+        });
+        
+        function markTaskAsCompleted(taskId) {
+            const taskCard = document.querySelector(`.task-card[data-task="${taskId}"]`);
+            const taskBtn = taskCard.querySelector('.task-btn');
+            
+            taskBtn.innerHTML = '<i class="fas fa-check"></i> Completed';
+            taskBtn.classList.add('completed-btn');
+            taskBtn.disabled = true;
+        }
+        
+        function updateTasksProgress() {
+            const totalTasks = Object.keys(completedTasks).length;
+            const completedTaskCount = Object.values(completedTasks).filter(Boolean).length;
+            const progressPercentage = (completedTaskCount / totalTasks) * 100;
+            
+            tasksProgressBar.style.width = `${progressPercentage}%`;
+            
+            completedTasksCount.textContent = completedTaskCount;
+            totalTasksCount.textContent = totalTasks;
+            
+            if (completedTaskCount === totalTasks) {
+                submitBtn.disabled = false;
+            } else {
+                submitBtn.disabled = true;
+            }
+        }
+        
+        const airdropForm = document.getElementById('airdropForm');
+        const successMessage = document.getElementById('successMessage');
+        
+        airdropForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            formData.append('completedTasks', JSON.stringify(completedTasks));
+            
+            fetch('process_airdrop.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    airdropForm.style.display = 'none';
+                    successMessage.classList.add('show');
+                    
+                    localStorage.setItem('mizuAirdropSubmitted', 'true');
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again later.');
+            });
+        });
+        
+        function checkSubmission() {
+            const isSubmitted = localStorage.getItem('mizuAirdropSubmitted');
+            if (isSubmitted === 'true') {
+                airdropForm.style.display = 'none';
+                successMessage.classList.add('show');
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCompletedTasks();
+            updateTasksProgress();
+            checkSubmission();
+        });
+    </script>
+    <script src="updated-visit-tracker.js"></script>
+</body>
+</html>

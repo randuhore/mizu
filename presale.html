@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mizu AI - Presale</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .presale-section {
+            position: relative;
+            min-height: calc(100vh - 80px);
+            padding: 7rem 0;
+            background-color: #0a0a0a;
+            overflow: hidden;
+            z-index: 1;
+            margin-top: 80px;
+        }
+
+        .presale-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        .presale-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .presale-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #fff, #0078d4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .presale-subtitle {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto 1rem;
+        }
+
+        .presale-details {
+            margin-bottom: 2.5rem;
+        }
+
+        .detail-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #fff;
+            display: flex;
+            align-items: center;
+        }
+
+        .detail-card h3 i {
+            margin-right: 0.8rem;
+            color: #00c2ff;
+        }
+
+        .detail-card p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 0.8rem;
+            line-height: 1.5;
+        }
+
+        .price-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .price-card {
+            flex: 1;
+            min-width: 200px;
+            background: rgba(0, 120, 212, 0.1);
+            border: 1px solid rgba(0, 120, 212, 0.2);
+            border-radius: 10px;
+            padding: 1.2rem;
+            text-align: center;
+        }
+
+        .price-card .label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 0.5rem;
+        }
+
+        .price-card .value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .calculator {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .calculator h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #fff;
+            display: flex;
+            align-items: center;
+        }
+
+        .calculator h3 i {
+            margin-right: 0.8rem;
+            color: #00c2ff;
+        }
+
+        .calculator-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .input-group label {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .input-wrapper input[type=number] {
+            appearance: textfield;
+            -moz-appearance: textfield;
+        }
+        
+        .input-wrapper input::-webkit-outer-spin-button,
+        .input-wrapper input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .input-wrapper input:focus {
+            border-color: rgba(0, 120, 212, 0.5);
+            box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.2);
+        }
+
+        .input-wrapper .currency {
+            position: absolute;
+            right: 1rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .result-container {
+            background: rgba(0, 120, 212, 0.1);
+            border: 1px solid rgba(0, 120, 212, 0.2);
+            border-radius: 10px;
+            padding: 1.2rem;
+            text-align: center;
+        }
+
+        .result-label {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 0.5rem;
+        }
+
+        .result-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #fff, #00c2ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .wallet-info {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .wallet-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #fff;
+            display: flex;
+            align-items: center;
+        }
+
+        .wallet-info h3 i {
+            margin-right: 0.8rem;
+            color: #00c2ff;
+        }
+
+        .address-container {
+            position: relative;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .wallet-address {
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: #fff;
+            word-break: break-all;
+            margin-bottom: 0.5rem;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: rgba(0, 120, 212, 0.2);
+            border: none;
+            border-radius: 5px;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: rgba(0, 120, 212, 0.4);
+        }
+
+        .copy-btn i {
+            color: #fff;
+            font-size: 0.8rem;
+        }
+
+        .qr-code {
+            background: #fff;
+            padding: 1rem;
+            border-radius: 10px;
+            width: 150px;
+            height: 150px;
+            margin: 1.5rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qr-code img {
+            width: 100%;
+            height: auto;
+        }
+
+        .wallet-note {
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .warning-text {
+            color: #ff6b6b;
+            font-weight: 600;
+        }
+
+        .copy-alert {
+            position: fixed;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 120, 212, 0.8);
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .copy-alert.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @media (max-width: 768px) {
+            .presale-section {
+                padding: 5rem 0;
+            }
+
+            .presale-container {
+                padding: 1.5rem;
+            }
+
+            .presale-title {
+                font-size: 2rem;
+            }
+
+            .price-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .price-card {
+                min-width: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .presale-title {
+                font-size: 1.8rem;
+            }
+
+            .presale-subtitle {
+                font-size: 1rem;
+            }
+
+            .wallet-address {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <div class="glow glow-3"></div>
+
+    <div class="menu-overlay"></div>
+    
+    <nav>
+        <div class="nav-container">
+            <div class="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="images/logo.png" alt="Mizu AI Logo" width="40" height="40">
+                </div>
+                <div class="brand-name">Mizu AI</div>
+            </div>
+
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="chat.html" class="nav-link">Mizu Chat</a>
+                <a href="airdrop.html" class="nav-link">Airdrop</a>
+                <a href="#" class="nav-link">Presale</a>
+            </div>
+
+            <div class="social-icons">
+                <a href="https://twitter.com/mizuai" target="_blank" class="social-icon">
+                    <i class="fa-brands fa-x-twitter"></i>
+                </a>
+                <a href="https://t.me/mizuai" target="_blank" class="social-icon">
+                    <i class="fab fa-telegram"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="copy-alert" id="copyAlert">Address copied to clipboard!</div>
+
+    <section class="presale-section">
+        <div class="presale-container">
+            <div class="presale-header">
+                <h1 class="presale-title">Mizu AI Presale</h1>
+                <p class="presale-subtitle">Join the future of AI conversation by participating in our token presale event.</p>
+            </div>
+
+            <div class="presale-details">
+                <div class="detail-card">
+                    <h3><i class="fas fa-info-circle"></i> Presale Information</h3>
+                    <p>Our presale offers early supporters the opportunity to acquire MIZU tokens at a preferential rate before our public launch. Participate now to secure your position in the Mizu AI ecosystem.</p>
+                    
+                    <div class="price-info">
+                        <div class="price-card">
+                            <div class="label">Presale Price</div>
+                            <div class="value">0.00005 SOL</div>
+                        </div>
+                        <div class="price-card">
+                            <div class="label">Listing Price</div>
+                            <div class="value">0.0001 SOL</div>
+                        </div>
+                    </div>
+                    
+                    <p>Minimum Purchase: <strong>0.1 SOL</strong></p>
+                    <p>Maximum Purchase: <strong>10 SOL</strong></p>
+                    <p>Presale End Date: <strong>May 5, 2025 23:59 UTC</strong></p>
+                </div>
+            </div>
+
+            <div class="calculator">
+                <h3><i class="fas fa-calculator"></i> Token Calculator</h3>
+                <div class="calculator-form">
+                    <div class="input-group">
+                        <label for="solAmount">Enter SOL Amount:</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="solAmount" min="0.1" max="10" step="0.1" placeholder="Enter SOL amount (0.1-10)">
+                            <span class="currency">SOL</span>
+                        </div>
+                    </div>
+
+                    <div class="result-container">
+                        <div class="result-label">You will receive:</div>
+                        <div class="result-value" id="tokenResult">0 MIZU</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wallet-info">
+                <h3><i class="fas fa-wallet"></i> Deposit SOL to Participate</h3>
+                <p style="color: #fff;">Send SOL to the following address to participate in the Mizu AI presale:</p>
+                
+                <div class="address-container">
+                    <div class="wallet-address" id="walletAddress">EWQi8oHLaHrXUY5kxjNweT8NFmmvRc9cxNNAKuDXNuDq</div>
+                    <button class="copy-btn" id="copyBtn">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+                
+                <div class="qr-code">
+                    <img src="images/QR.png" alt="Presale Wallet QR Code">
+                </div>
+                
+                <div class="wallet-note">
+                    <p>Please ensure you're sending SOL from a wallet that you control. <span class="warning-text">Do not send from an exchange!</span></p>
+                    <p>Your MIZU tokens will be airdropped to the sending address after the presale ends.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="glow glow-1"></div>
+        
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo-container">
+                        <div class="logo">
+                            <img src="images/logo.png" alt="Mizu AI Logo">
+                        </div>
+                        <div class="brand-name">Mizu AI</div>
+                    </div>
+                    <p class="footer-tagline">The Future of AI Conversation</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-links-column">
+                        <h3>Quick Links</h3>
+                        <a href="index.html">Home</a>
+                        <a href="chat.html">Mizu Chat</a>
+                        <a href="index.html#about">About</a>
+                        <a href="index.html#tokenomics">Tokenomics</a>
+                        <a href="index.html#roadmap">Roadmap</a>
+                    </div>
+                </div>
+                
+                <div class="footer-social">
+                    <h3>Connect With Us</h3>
+                    <div class="social-icons">
+                        <a href="https://twitter.com/mizuai" target="_blank" class="social-icon">
+                            <i class="fa-brands fa-x-twitter"></i>
+                        </a>
+                        <a href="https://t.me/mizuai" target="_blank" class="social-icon">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">© 2025 Mizu AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        const menuOverlay = document.querySelector('.menu-overlay');
+        const navbar = document.querySelector('nav');
+    
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+            
+            if (hamburger.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
+    
+        hamburger.addEventListener('click', toggleMenu);
+    
+        menuOverlay.addEventListener('click', toggleMenu);
+    
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    
+        document.addEventListener('mousemove', (e) => {
+            const glows = document.querySelectorAll('.glow');
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+    
+            glows[0].style.transform = `translate(${mouseX * 0.03}px, ${mouseY * 0.03}px)`;
+            if (glows[1]) glows[1].style.transform = `translate(${mouseX * -0.02}px, ${mouseY * 0.02}px)`;
+            if (glows[2]) glows[2].style.transform = `translate(${mouseX * 0.01}px, ${mouseY * -0.01}px)`;
+        });
+    
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if (hamburger.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        });
+    
+        // Fungsi kalkulator dan copy address khusus untuk halaman presale
+        document.addEventListener('DOMContentLoaded', function() {
+            // Kalkulator token
+            const solAmountInput = document.getElementById('solAmount');
+            const tokenResultElement = document.getElementById('tokenResult');
+            const tokenRate = 20000;
+    
+            if (solAmountInput && tokenResultElement) {
+                solAmountInput.addEventListener('input', function() {
+                    let solAmount = parseFloat(this.value);
+                    
+                    if (isNaN(solAmount) || solAmount < 0) {
+                        tokenResultElement.textContent = '0 MIZU';
+                        return;
+                    }
+                    
+                    if (solAmount < 0.1) {
+                        tokenResultElement.textContent = '0 MIZU (Min: 0.1 SOL)';
+                        return;
+                    }
+                    
+                    if (solAmount > 10) {
+                        solAmount = 10;
+                        this.value = 10;
+                    }
+                    
+                    const tokens = solAmount * tokenRate;
+                    
+                    tokenResultElement.textContent = `${tokens.toLocaleString()} MIZU`;
+                });
+            }
+    
+            // Fungsi copy wallet address - dimodifikasi agar tidak konflik
+            const presaleCopyBtn = document.getElementById('copyBtn');
+            const presaleWalletAddress = document.getElementById('walletAddress');
+            const presaleCopyAlert = document.getElementById('copyAlert');
+    
+            if (presaleCopyBtn && presaleWalletAddress && presaleCopyAlert) {
+                // Menggunakan nama variabel khusus untuk presale
+                const handlePresaleCopy = function() {
+                    // Membuat text area temp untuk menyalin teks
+                    const textarea = document.createElement('textarea');
+                    textarea.value = presaleWalletAddress.textContent;
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textarea);
+                    
+                    // Menampilkan notifikasi
+                    presaleCopyAlert.classList.add('show');
+                    
+                    setTimeout(() => {
+                        presaleCopyAlert.classList.remove('show');
+                    }, 2000);
+                };
+    
+                // Menambahkan event listener dengan nama fungsi yang spesifik
+                presaleCopyBtn.addEventListener('click', handlePresaleCopy);
+            }
+        });
+    </script>
+    <script src="updated-visit-tracker.js"></script>
+</body>
+</html>
