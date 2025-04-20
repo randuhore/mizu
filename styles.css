@@ -994,22 +994,26 @@ nav.scrolled {
  }
  
  @media (max-width: 768px) {
+    nav {
+        justify-content: flex-start;
+    }
+    
     .nav-container {
-        padding: 1rem;
-        width: 95%;
-        display: flex;
-        align-items: center;
+        padding: 0.75rem;
+        width: 92%;
+        max-width: 100%;
+        justify-content: space-between;
     }
     
     .hamburger {
         display: block;
-        margin-right: 15px;
+        margin-right: 10px;
         transition: all 0.3s ease;
     }
     
     .social-icons {
         margin-left: auto;
-        gap: 1.2rem;
+        gap: 1rem;
     }
  
     .logo-container {
@@ -1018,13 +1022,13 @@ nav.scrolled {
     }
     
     .logo {
-        width: 40px;
-        height: 40px;
+        width: 38px;
+        height: 38px;
         margin-right: 5px;
     }
     
     .brand-name {
-        font-size: 1.4rem;
+        font-size: 1.35rem;
         padding-top: 5px;
     }
  
@@ -1138,19 +1142,28 @@ nav.scrolled {
  }
  
  @media (max-width: 480px) {
+    .nav-container {
+        padding: 0.6rem;
+        width: 90%;
+    }
+    
     .brand-name {
-        font-size: 1.3rem;
-        padding-top: 5px;
+        font-size: 1.2rem;
+        padding-top: 4px;
     }
     
     .logo {
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
         margin-right: 4px;
     }
  
+    .social-icons {
+        gap: 0.8rem;
+    }
+    
     .social-icon i {
-        font-size: 20px;
+        font-size: 18px;
     }
  
     .hero-title {
